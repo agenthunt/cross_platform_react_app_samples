@@ -24,3 +24,5 @@ This repo is a collection of cross platform react application samples. The goal 
 * Packaging for windows
     * npm run package:windows
     * \<ProjectName\>-win32 dir will be created under the project/dist directory.
+    
+    ![](https://github.com/agenthunt/cross_platform_react_app_samples/blob/master/docs/screencast.gif)
