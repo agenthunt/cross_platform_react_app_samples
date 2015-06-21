@@ -1,0 +1,4 @@
+This is a cross platform react project template. It uses node webkit/electron for desktops ( windows, linux, osx ) and react-native for ios and android(not available yet). 
+It uses npm scripts for building, developing and packaging. I personally prefer this since grunt,gulp etc looks very bloated and with npm scripts I can get overview of all the build steps very easily at one place. 
+
+This project shows a list of images. The data for the list of images is obtained from dummy flux backend. The data layer is the same for all platforms where as the ui differs for desktops , ios and android. Here is a gif of how it looks on different platforms

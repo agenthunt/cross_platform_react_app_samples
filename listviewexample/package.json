@@ -1,0 +1,57 @@
+{
+  "name": "listview",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "browserify": "^10.0.0",
+    "electron-packager": "^4.1.2",
+    "flux": "^2.0.3",
+    "keymirror": "^0.1.1",
+    "live-reload": "^1.1.0",
+    "nodemon": "^1.3.7",
+    "object-assign": "^2.0.0",
+    "parallelshell": "^1.1.1",
+    "path": "^0.11.14",
+    "react": "^0.13.2",
+    "react-native": "^0.4.1",
+    "reactify": "^1.1.0",
+    "rimraf": "^2.3.3",
+    "stylus": "^0.51.1",
+    "watch": "^0.16.0",
+    "watchify": "^3.2.1"
+  },
+  "engines": {
+    "node": ">=0.10.3 <0.13"
+  },
+  "scripts": {
+    "clean": "rimraf www/* && rimraf dist/*",
+    "build": "npm run build:html && npm run build:images && npm run build:data && npm run build:client && npm run build:server  && npm run build:styles",
+    "build:server": "cp -R src/server www/",
+    "build:images": "cp -R src/images www/",
+     "build:data": "cp -R src/data www/",
+    "build:client": "browserify -d --bare -t reactify src/client/ui/web/index.js  > www/client.js",
+    "build:styles": "stylus src/client/styles/main.styl -m -o www/",
+    "build:html": "cp src/client/ui/web/index.html www/",
+    "build:electron": "npm run build && cp platforms/electron/package.json www/ && cp platforms/electron/main.js www/",
+    "watch:scripts": "watchify -v --bare -d -t reactify src/client/ui/web/index.js  -o www/client.js",
+    "watch:styles": "nodemon -q -w src/client/styles --ext '.styl' --exec 'npm run build:styles'",
+    "watch:html": "nodemon -q -w src/client --ext '.html' --exec 'npm run build:html'",
+    "watch:images": "nodemon -q -w src --ext jpg,png,jpeg --exec 'npm run build:images'",
+    "watch:data": "nodemon -q -w src/server/data --exec 'npm run build:data'",
+    "watch": "parallelshell  'npm run watch:scripts' 'npm run watch:styles' 'npm run watch:html' 'npm run watch:images'",
+    "live-reload": "live-reload --port 9091 www/",
+    "dev:electron": "npm run build:electron && cd ./www && electron --debug ./ & parallelshell  'npm run live-reload -s' 'npm run watch'",
+    "package:ios": "echo not implemented",
+    "package:android": "echo not implemented",
+    "package:osx": "npm run build:electron && electron-packager ./www ListViewExample --platform=darwin --arch=x64 --version=0.27.1 --out=dist/",
+    "package:linux": "npm run build:electron && electron-packager ./www ListViewExample --platform=linux --arch=x64 --version=0.27.1 --out=dist/",
+    "package:windows": "npm run build:electron && electron-packager ./www ListViewExample --platform=win32 --arch=x64 --version=0.27.1 --out=dist/"
+  },
+  "dependencies": {
+    "embedded-jxcoreengine-ios": "git://github.com/agenthunt/EmbeddedJXcoreEngineIOS.git",
+    "superagent": "^1.2.0"
+  }
+}

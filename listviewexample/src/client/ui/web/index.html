@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title></title>
+  <link rel="stylesheet" href="main.css">
+</head>
+
+<body>
+  <div id="main"></div>
+  <script type="text/javascript" src="client.js"></script>
+  <script type="text/javascript">
+  // Add this script tag to the end of your main file:
+  var path = './';
+  var fs = require('fs');
+  console.log('location pathname' + location.pathname);
+  fs.watch(path, function() {
+    if (location) {
+      location.reload();
+    }
+  });
+  </script>
+</body>
+
+</html>
